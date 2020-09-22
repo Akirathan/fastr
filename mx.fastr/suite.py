@@ -57,7 +57,7 @@ suite = {
     "F2C" : {
         "path" : "libdownloads/f2c/src.tgz",
         "urls" : ["https://netlib.sandia.gov/f2c/src.tgz"],
-        "sha1" : "8a26107bf9f82a2dcfa597f15549a412be75e0ee",
+        "sha1" : "e2c798e165622c55c4eeb358fbd1b5dbae1d778d",
         "resource" : "true"
     },
 

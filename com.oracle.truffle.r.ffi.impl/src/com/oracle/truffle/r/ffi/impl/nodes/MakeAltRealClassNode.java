@@ -22,9 +22,11 @@
  */
 package com.oracle.truffle.r.ffi.impl.nodes;
 
+import com.oracle.truffle.api.TruffleLogger;
 import com.oracle.truffle.api.dsl.CachedContext;
 import com.oracle.truffle.api.dsl.GenerateUncached;
 import com.oracle.truffle.api.dsl.Specialization;
+import com.oracle.truffle.r.runtime.RLogger;
 import com.oracle.truffle.r.runtime.context.AltRepContext;
 import com.oracle.truffle.r.runtime.context.RContext;
 import com.oracle.truffle.r.runtime.context.TruffleRLanguage;
@@ -35,6 +37,7 @@ import com.oracle.truffle.r.runtime.context.TruffleRLanguage;
  */
 @GenerateUncached
 public abstract class MakeAltRealClassNode extends FFIUpCallNode.Arg3 {
+    private static final TruffleLogger altrepLogger = RLogger.getLogger(RLogger.LOGGER_ALTREP);
 
     public static MakeAltRealClassNode create() {
         return MakeAltRealClassNodeGen.create();
@@ -44,6 +47,7 @@ public abstract class MakeAltRealClassNode extends FFIUpCallNode.Arg3 {
     protected Object makeAltRealClass(String className, String packageName, @SuppressWarnings("unused") Object dllInfo,
                     @CachedContext(TruffleRLanguage.class) RContext context) {
         AltRepContext altRepCtx = context.altRepContext;
+        altrepLogger.fine(() -> "Making new altreal class " + packageName + ":" + className);
         return altRepCtx.registerNewAltRealClass(className, packageName);
     }
 }

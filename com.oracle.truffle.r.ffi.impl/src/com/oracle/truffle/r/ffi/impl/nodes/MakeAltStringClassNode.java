@@ -44,7 +44,7 @@ public abstract class MakeAltStringClassNode extends FFIUpCallNode.Arg3 {
     @TruffleBoundary
     @Specialization
     protected Object makeAltStringClass(String className, String packageName, @SuppressWarnings("unused") Object dllInfo) {
-        altrepLogger.fine(() -> "Making new alt string class " + packageName + ":" + className);
+        altrepLogger.fine(() -> "Making new altstring class " + packageName + ":" + className);
         return AltRepContext.registerNewAltStringClass(className, packageName);
     }
 }

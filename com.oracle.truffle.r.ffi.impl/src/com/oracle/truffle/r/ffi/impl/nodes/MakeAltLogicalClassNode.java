@@ -23,8 +23,10 @@
 package com.oracle.truffle.r.ffi.impl.nodes;
 
 import com.oracle.truffle.api.CompilerDirectives.TruffleBoundary;
+import com.oracle.truffle.api.TruffleLogger;
 import com.oracle.truffle.api.dsl.GenerateUncached;
 import com.oracle.truffle.api.dsl.Specialization;
+import com.oracle.truffle.r.runtime.RLogger;
 import com.oracle.truffle.r.runtime.context.AltRepContext;
 
 /**
@@ -33,6 +35,7 @@ import com.oracle.truffle.r.runtime.context.AltRepContext;
  */
 @GenerateUncached
 public abstract class MakeAltLogicalClassNode extends FFIUpCallNode.Arg3 {
+    private static final TruffleLogger altrepLogger = RLogger.getLogger(RLogger.LOGGER_ALTREP);
 
     public static MakeAltLogicalClassNode create() {
         return MakeAltLogicalClassNodeGen.create();
@@ -41,6 +44,7 @@ public abstract class MakeAltLogicalClassNode extends FFIUpCallNode.Arg3 {
     @TruffleBoundary
     @Specialization
     protected Object makeAltLogicalClass(String className, String packageName, @SuppressWarnings("unused") Object dllInfo) {
+        altrepLogger.fine(() -> "Making new altlogical class " + packageName + ":" + className);
         return AltRepContext.registerNewAltLogicalClass(className, packageName);
     }
 }

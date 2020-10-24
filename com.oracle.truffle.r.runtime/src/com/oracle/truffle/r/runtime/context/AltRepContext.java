@@ -71,7 +71,9 @@ public final class AltRepContext implements RContext.ContextState {
     }
 
     public static AltStringClassDescriptor registerNewAltStringClass(String className, String packageName) {
-        return new AltStringClassDescriptor(className, packageName);
+        AltStringClassDescriptor altStringClassDesc = new AltStringClassDescriptor(className, packageName);
+        logger.fine(() -> "Registered ALTSTRING class: " + altStringClassDesc.toString());
+        return altStringClassDesc;
     }
 
     public static AltRawClassDescriptor registerNewAltRawClass(String className, String packageName) {

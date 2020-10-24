@@ -124,6 +124,10 @@ void *DATAPTR(SEXP x) {
 	}
 }
 
+void *STDVEC_DATAPTR(SEXP x) {
+    return DATAPTR(x);
+}
+
 int *INTEGER0(SEXP x) {
     return (int *) DATAPTR(x);
 }
